@@ -11,6 +11,7 @@ composer require sj-i/php-cast
 
 ```
 use PhpCast\Cast;
+use PhpCast\NullableCast;
 
 // int(1)
 $int_value = Cast::toInt('1');
@@ -23,6 +24,23 @@ $bool_value = Cast::toBool(1);
 
 // TypeError
 $int_value = Cast::toInt('a');
+// TypeError
+$int_value = Cast::toInt(null);
+
+
+// int(1)
+$int_value = NullableCast::toInt('1');
+// string(1) "1"
+$string_value = NullableCast::toString(1);
+// float(1)
+$float_value = NullableCast::toFloat(1);
+// bool(true)
+$bool_value = NullableCast::toBool(1);
+
+// TypeError
+$null_value = NullableCast:toInt('');
+// null
+$null_value = NullableCast:toInt(null);
 ```
 
 ## LICENSE
