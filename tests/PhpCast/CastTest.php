@@ -7,9 +7,11 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * declare(strict_types=1) in the line below is important :-)
  */
 
-declare(strict_types=1); // important :-)
+declare(strict_types=1);
 
 namespace PhpCast;
 
@@ -19,7 +21,7 @@ use TypeError;
 
 class CastTest extends TestCase
 {
-    public function testToInt()
+    public function testToInt(): void
     {
         $this->assertSame(0, Cast::toInt(0));
         $this->assertSame(1, Cast::toInt(1));
@@ -44,7 +46,7 @@ class CastTest extends TestCase
         $this->assertTypeError(fn () => Cast::toInt(-9223372036854776833));
     }
 
-    public function testToFloat()
+    public function testToFloat(): void
     {
         $this->assertSame(0.0, Cast::toFloat(0));
         $this->assertSame(1.0, Cast::toFloat(1));
@@ -69,7 +71,7 @@ class CastTest extends TestCase
         $this->assertTypeError(fn () => Cast::toFloat((object)[]));
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $this->assertSame('0', Cast::toString(0));
         $this->assertSame('1', Cast::toString(1));
@@ -82,7 +84,14 @@ class CastTest extends TestCase
         $this->assertSame('1', Cast::toString(true));
         $this->assertSame(
             'stringable',
-            Cast::toString(new class () {public function __toString() {return 'stringable';}})
+            Cast::toString(
+                new class () {
+                    public function __toString()
+                    {
+                        return 'stringable';
+                    }
+                }
+            )
         );
 
         $this->assertTypeError(fn () => Cast::toString(null));
@@ -90,7 +99,7 @@ class CastTest extends TestCase
         $this->assertTypeError(fn () => Cast::toString((object)[]));
     }
 
-    public function testToBool()
+    public function testToBool(): void
     {
         $this->assertSame(false, Cast::toBool(0));
         $this->assertSame(true, Cast::toBool(1));

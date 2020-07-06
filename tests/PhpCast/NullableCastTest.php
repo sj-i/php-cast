@@ -7,9 +7,11 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * declare(strict_types=1) in the line below is important :-)
  */
 
-declare(strict_types=1); // important :-)
+declare(strict_types=1);
 
 namespace PhpCast;
 
@@ -19,7 +21,7 @@ use TypeError;
 
 class NullableCastTest extends TestCase
 {
-    public function testToInt()
+    public function testToInt(): void
     {
         $this->assertSame(null, NullableCast::toInt(null));
         $this->assertSame(0, NullableCast::toInt(0));
@@ -44,7 +46,7 @@ class NullableCastTest extends TestCase
         $this->assertTypeError(fn () => NullableCast::toInt(-9223372036854776833));
     }
 
-    public function testToFloat()
+    public function testToFloat(): void
     {
         $this->assertSame(null, NullableCast::toFloat(null));
         $this->assertSame(0.0, NullableCast::toFloat(0));
@@ -69,7 +71,7 @@ class NullableCastTest extends TestCase
         $this->assertTypeError(fn () => NullableCast::toFloat((object)[]));
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $this->assertSame(null, NullableCast::toString(null));
         $this->assertSame('0', NullableCast::toString(0));
@@ -83,14 +85,21 @@ class NullableCastTest extends TestCase
         $this->assertSame('1', NullableCast::toString(true));
         $this->assertSame(
             'stringable',
-            NullableCast::toString(new class () {public function __toString() {return 'stringable';}})
+            NullableCast::toString(
+                new class () {
+                    public function __toString()
+                    {
+                        return 'stringable';
+                    }
+                }
+            )
         );
 
         $this->assertTypeError(fn () => NullableCast::toString([]));
         $this->assertTypeError(fn () => NullableCast::toString((object)[]));
     }
 
-    public function testToBool()
+    public function testToBool(): void
     {
         $this->assertSame(null, NullableCast::toBool(null));
         $this->assertSame(false, NullableCast::toBool(0));
