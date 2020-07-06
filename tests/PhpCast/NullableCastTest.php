@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace PhpCast;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 use TypeError;
@@ -44,6 +45,17 @@ class NullableCastTest extends TestCase
         $this->assertTypeError(fn () => NullableCast::toInt((object)[]));
         $this->assertTypeError(fn () => NullableCast::toInt(PHP_INT_MAX + 1));
         $this->assertTypeError(fn () => NullableCast::toInt(-9223372036854776833));
+
+        try {
+            NullableCast::toInt('123abc');
+        } catch(\Throwable $e) {
+        }
+        $this->assertTrue(isset($e));
+        $this->assertInstanceOf(TypeError::class, $e);
+        $this->assertInstanceOf(Exception::class, $e->getPrevious());
+        $this->assertSame('A non well formed numeric value encountered', $e->getPrevious()->getMessage());
+        $result = @NullableCast::toInt('123abc');
+        $this->assertSame(123, $result);
     }
 
     public function testToFloat(): void
