@@ -1,0 +1,32 @@
+{
+  "name": "sj-i/php-cast",
+  "description": "Explicit cast with the behavior of implicit weak mode cast",
+  "type": "library",
+  "keywords": [
+    "cast"
+  ],
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "sji",
+      "homepage": "https://twitter.com/sji_ch"
+    }
+  ],
+  "require": {
+    "php": "^7.0 || ^8.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "PhpCast\\": "src/PhpCast"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PhpCast\\": "tests/PhpCast"
+    }
+  }
+}
