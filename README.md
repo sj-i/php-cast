@@ -7,6 +7,9 @@
 composer require sj-i/php-cast
 ```
 
+## SUPPORTED VERSIONS
+- PHP 7.0+
+
 ## USAGE
 
 ```
