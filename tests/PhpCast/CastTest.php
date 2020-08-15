@@ -48,7 +48,7 @@ class CastTest extends TestCase
 
         try {
             Cast::toInt('123abc');
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
         }
         $this->assertTrue(isset($e));
         $this->assertInstanceOf(TypeError::class, $e);
@@ -113,22 +113,22 @@ class CastTest extends TestCase
 
     public function testToBool(): void
     {
-        $this->assertSame(false, Cast::toBool(0));
-        $this->assertSame(true, Cast::toBool(1));
-        $this->assertSame(true, Cast::toBool(1.1));
-        $this->assertSame(false, Cast::toBool('0'));
-        $this->assertSame(true, Cast::toBool('1'));
-        $this->assertSame(true, Cast::toBool('a'));
-        $this->assertSame(true, Cast::toBool('1.1'));
-        $this->assertSame(false, Cast::toBool(false));
-        $this->assertSame(true, Cast::toBool(true));
-        $this->assertSame(false, Cast::toBool(''));
-        $this->assertSame(true, Cast::toBool('a'));
-        $this->assertSame(true, Cast::toBool('ok'));
-        $this->assertSame(true, Cast::toBool('ng'));
-        $this->assertSame(true, Cast::toBool('false'));
-        $this->assertSame(true, Cast::toBool('true'));
-        $this->assertSame(true, Cast::toBool('null'));
+        $this->assertFalse(Cast::toBool(0));
+        $this->assertTrue(Cast::toBool(1));
+        $this->assertTrue(Cast::toBool(1.1));
+        $this->assertFalse(Cast::toBool('0'));
+        $this->assertTrue(Cast::toBool('1'));
+        $this->assertTrue(Cast::toBool('a'));
+        $this->assertTrue(Cast::toBool('1.1'));
+        $this->assertFalse(Cast::toBool(false));
+        $this->assertTrue(Cast::toBool(true));
+        $this->assertFalse(Cast::toBool(''));
+        $this->assertTrue(Cast::toBool('a'));
+        $this->assertTrue(Cast::toBool('ok'));
+        $this->assertTrue(Cast::toBool('ng'));
+        $this->assertTrue(Cast::toBool('false'));
+        $this->assertTrue(Cast::toBool('true'));
+        $this->assertTrue(Cast::toBool('null'));
 
         $this->assertTypeError(fn () => Cast::toBool(null));
         $this->assertTypeError(fn () => Cast::toBool([]));
