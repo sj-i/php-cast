@@ -24,7 +24,7 @@ class NullableCastTest extends TestCase
 {
     public function testToInt(): void
     {
-        $this->assertSame(null, NullableCast::toInt(null));
+        $this->assertNull(NullableCast::toInt(null));
         $this->assertSame(0, NullableCast::toInt(0));
         $this->assertSame(1, NullableCast::toInt(1));
         $this->assertSame(1, NullableCast::toInt(1.1));
@@ -48,7 +48,7 @@ class NullableCastTest extends TestCase
 
         try {
             NullableCast::toInt('123abc');
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
         }
         $this->assertTrue(isset($e));
         $this->assertInstanceOf(TypeError::class, $e);
@@ -60,7 +60,7 @@ class NullableCastTest extends TestCase
 
     public function testToFloat(): void
     {
-        $this->assertSame(null, NullableCast::toFloat(null));
+        $this->assertNull(NullableCast::toFloat(null));
         $this->assertSame(0.0, NullableCast::toFloat(0));
         $this->assertSame(1.0, NullableCast::toFloat(1));
         $this->assertSame(1.1, NullableCast::toFloat(1.1));
@@ -85,7 +85,7 @@ class NullableCastTest extends TestCase
 
     public function testToString(): void
     {
-        $this->assertSame(null, NullableCast::toString(null));
+        $this->assertNull(NullableCast::toString(null));
         $this->assertSame('0', NullableCast::toString(0));
         $this->assertSame('1', NullableCast::toString(1));
         $this->assertSame('1.1', NullableCast::toString(1.1));
@@ -113,23 +113,23 @@ class NullableCastTest extends TestCase
 
     public function testToBool(): void
     {
-        $this->assertSame(null, NullableCast::toBool(null));
-        $this->assertSame(false, NullableCast::toBool(0));
-        $this->assertSame(true, NullableCast::toBool(1));
-        $this->assertSame(true, NullableCast::toBool(1.1));
-        $this->assertSame(false, NullableCast::toBool('0'));
-        $this->assertSame(true, NullableCast::toBool('1'));
-        $this->assertSame(true, NullableCast::toBool('a'));
-        $this->assertSame(true, NullableCast::toBool('1.1'));
-        $this->assertSame(false, NullableCast::toBool(false));
-        $this->assertSame(true, NullableCast::toBool(true));
-        $this->assertSame(false, NullableCast::toBool(''));
-        $this->assertSame(true, NullableCast::toBool('a'));
-        $this->assertSame(true, NullableCast::toBool('ok'));
-        $this->assertSame(true, NullableCast::toBool('ng'));
-        $this->assertSame(true, NullableCast::toBool('false'));
-        $this->assertSame(true, NullableCast::toBool('true'));
-        $this->assertSame(true, NullableCast::toBool('null'));
+        $this->assertNull(NullableCast::toBool(null));
+        $this->assertFalse(NullableCast::toBool(0));
+        $this->assertTrue(NullableCast::toBool(1));
+        $this->assertTrue(NullableCast::toBool(1.1));
+        $this->assertFalse(NullableCast::toBool('0'));
+        $this->assertTrue(NullableCast::toBool('1'));
+        $this->assertTrue(NullableCast::toBool('a'));
+        $this->assertTrue(NullableCast::toBool('1.1'));
+        $this->assertFalse(NullableCast::toBool(false));
+        $this->assertTrue(NullableCast::toBool(true));
+        $this->assertFalse(NullableCast::toBool(''));
+        $this->assertTrue(NullableCast::toBool('a'));
+        $this->assertTrue(NullableCast::toBool('ok'));
+        $this->assertTrue(NullableCast::toBool('ng'));
+        $this->assertTrue(NullableCast::toBool('false'));
+        $this->assertTrue(NullableCast::toBool('true'));
+        $this->assertTrue(NullableCast::toBool('null'));
 
         $this->assertTypeError(fn () => NullableCast::toBool([]));
         $this->assertTypeError(fn () => NullableCast::toBool((object)[]));
