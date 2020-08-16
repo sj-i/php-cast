@@ -52,7 +52,7 @@ jobs:
       - name: Run test suite
         run: |
           mkdir -p build/logs
-          ./vendor/bin/phpunit --do-not-cache-result --coverage-clover build/logs/clover.xml
+          ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
       - name: Send to Coveralls
         env:
