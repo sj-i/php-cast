@@ -12,18 +12,15 @@ jobs:
 
   phpunit-test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php-versions: ['7.0', '7.1', '7.2', '7.3', '7.4']
-    name: PHP ${{ matrix.php-versions }} Test
     steps:
       - uses: actions/checkout@v2
 
       - name: Setup PHP Action
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
+          php-version: 7.4
           extensions: dom, mbstring
+          coverage: pcov
 
       - name: Get Composer Cache Directory
         id: composer-cache
@@ -51,4 +48,9 @@ jobs:
       - name: Run test suite
         run: |
           mkdir -p build/logs
-          ./vendor/bin/phpunit
+          ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+      - name: Send to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./vendor/bin/php-coveralls -v
