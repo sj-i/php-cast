@@ -80,9 +80,6 @@ class CastTest extends TestCase
                 $this->assertInstanceOf(Exception::class, $e);
                 $this->assertSame('A non well formed numeric value encountered', $e->getMessage());
             }
-            $this->assertInstanceOf(TypeError::class, $e);
-            $this->assertInstanceOf(Exception::class, $e->getPrevious());
-            $this->assertSame('A non well formed numeric value encountered', $e->getPrevious()->getMessage());
         }
         $result = @Cast::toInt('123abc');
         $this->assertSame(123, $result);
