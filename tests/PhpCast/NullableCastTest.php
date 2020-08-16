@@ -70,9 +70,14 @@ class NullableCastTest extends TestCase
         }
         if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
             $this->assertTrue(isset($e));
-            $this->assertInstanceOf(TypeError::class, $e);
-            $this->assertInstanceOf(Exception::class, $e->getPrevious());
-            $this->assertSame('A non well formed numeric value encountered', $e->getPrevious()->getMessage());
+            if (version_compare(PHP_VERSION, '7.4.0') >= 0) {
+                $this->assertInstanceOf(TypeError::class, $e);
+                $this->assertInstanceOf(Exception::class, $e->getPrevious());
+                $this->assertSame('A non well formed numeric value encountered', $e->getPrevious()->getMessage());
+            } else {
+                $this->assertInstanceOf(Exception::class, $e);
+                $this->assertSame('A non well formed numeric value encountered', $e->getMessage());
+            }
         }
         $result = @NullableCast::toInt('123abc');
         $this->assertSame(123, $result);
