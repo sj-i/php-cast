@@ -67,9 +67,9 @@ $null_value = NullableCast::toInt(null);
     - This was, if I understand it correctly, one of the reasons that strict type checks weren't totally welcomed with open arms during the discussion introducing the scalar type hinting to PHP.
 - Defining proper rules of validations and type conversions is sometimes overkill.
     - Even though defining them are always "correct" things to do, in humans life, there are times you don't need to be so correct.
-- Let's cast untyped values in the weak mode manner, use the "official" rules of validations and type conversions in PHP world!
+- Let's cast untyped values in the weak mode manner, use the "official" rules of validations and type conversions in the PHP world!
     - No need to invent and learn new rules every day every night everywhere.
-    - If the "official" rules doesn't fit your needs, then define ans use your own rules selectively there.
+    - If the "official" rules doesn't fit your needs, then define and use your own rules selectively there.
 - If you've ever read [the accepted RFC of STH](https://wiki.php.net/rfc/scalar_type_hints_v5), you would notice the use of weak mode like this library has been already mentioned [there](https://wiki.php.net/rfc/scalar_type_hints_v5#this_proposal_is_a_compromise).
     > This proposal is not a compromise. It is an attempt of allowing strict typing to work in PHP. A mechanism to bridge untyped PHP code with strict typed PHP code, a “weak” bridge, would be required (otherwise explicit (type) casts would be needed). This proposal unifies the strict and weak typing into a single system that integrates tightly and behaves consistently.  
 
