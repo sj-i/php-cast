@@ -54,7 +54,7 @@ $null_value = NullableCast::toInt(null);
 
 ## HOW IT WORKS
 - Return type declarations in weak mode files do the job.
-- `PhpCast\Cast` and `PhpCast\NullableCast` are defined in files declared as `strict_types=0`
+- `PhpCast\Cast` is defined in a file declared as `strict_types=0`
     - Though `strict_types=0` is the current default of PHP, it is explicitly declared to assert the intent.
 - The type checks for parameters are done in the caller mode, but the type checks for return values are always done in the callee mode.
 
